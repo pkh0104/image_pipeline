@@ -166,7 +166,7 @@ public:
 
 private:
   image_proc::Processor mono_processor_;
-  
+
   mutable cv::Mat_<int16_t> disparity16_; // scratch buffer for 16-bit signed disparity image
 #if CV_MAJOR_VERSION == 3
   mutable cv::Ptr<cv::StereoBM> block_matcher_; // contains scratch buffers for block matching
