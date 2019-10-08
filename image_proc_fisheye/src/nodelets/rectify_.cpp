@@ -36,7 +36,14 @@ namespace image_proc_fisheye {
     camera.fromCameraInfo(info_msg);
     cv::Mat m1;
     cv::Mat m2;
-    cv::fisheye::initUndistortRectifyMap(camera.intrinsicMatrix(), camera.distortionCoeffs(), cv::Mat(), camera.intrinsicMatrix(), camera.fullResolution(), CV_32FC1, m1, m2);
+    //cv::fisheye::initUndistortRectifyMap(camera.intrinsicMatrix(), camera.distortionCoeffs(), cv::Mat(), camera.intrinsicMatrix(), camera.fullResolution(), CV_32FC1, m1, m2);
+    cv::Mat_<double> fisheye_distortion_coeffs(1, 4, 0.0);
+    fisheye_distortion_coeffs(0, 1) = camera.distortionCoeffs()(0, 1);
+    fisheye_distortion_coeffs(0, 2) = camera.distortionCoeffs()(0, 2);
+    fisheye_distortion_coeffs(0, 3) = camera.distortionCoeffs()(0, 3);
+    fisheye_distortion_coeffs(0, 4) = camera.distortionCoeffs()(0, 4);
+    cv::fisheye::initUndistortRectifyMap(camera.intrinsicMatrix(), fisheye_distortion_coeffs, cv::Mat(), camera.intrinsicMatrix(), camera.fullResolution(), CV_32FC1, m1, m2);
+    // 
     mapx_ = cv::Mat(m1);
     mapy_ = cv::Mat(m2);
     sub_info_.shutdown();

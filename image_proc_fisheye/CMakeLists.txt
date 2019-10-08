@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 2.8.3)
 project(image_proc_fisheye)
 set (CMAKE_CXX_STANDARD 11)
 
+find_package(OpenCV REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
   image_geometry
-  OpenCV
   sensor_msgs
   std_msgs
   roscpp
@@ -30,4 +30,25 @@ add_executable(image_proc_fisheye_exe src/image_proc_fisheye.cpp)
 target_link_libraries(image_proc_fisheye_exe
    ${PROJECT_NAME}
    ${catkin_LIBRARIES}
+)
+
+#############
+## Install ##
+#############
+
+## Mark executables and/or libraries for installation
+install(TARGETS ${PROJECT_NAME}_exe ${PROJECT_NAME}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
+
+## Copy launch files
+install(DIRECTORY launch/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+  FILES_MATCHING PATTERN "*.launch"
+)
+
+install(DIRECTORY src/nodelets/ 
+   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+   FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )

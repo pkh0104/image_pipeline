@@ -3,7 +3,7 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup()
-d['packages'] = ['camera_calibration']
+d['packages'] = ['camera_calibration_fisheye']
 d['package_dir'] = {'':'src'}
 
 setup(**d)

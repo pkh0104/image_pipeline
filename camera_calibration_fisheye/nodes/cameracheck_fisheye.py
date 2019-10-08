@@ -33,7 +33,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import rospy
-from camera_calibration.camera_checker import CameraCheckerNode
+from camera_calibration_fisheye.camera_checker_fisheye import CameraCheckerNode
 
 
 def main():

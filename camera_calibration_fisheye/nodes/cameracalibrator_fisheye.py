@@ -37,8 +37,8 @@ import functools
 import message_filters
 import os
 import rospy
-from camera_calibration.camera_calibrator import OpenCVCalibrationNode
-from camera_calibration.calibrator import ChessboardInfo, Patterns
+from camera_calibration_fisheye.camera_calibrator_fisheye import OpenCVCalibrationNode
+from camera_calibration_fisheye.calibrator_fisheye import ChessboardInfo, Patterns
 from message_filters import ApproximateTimeSynchronizer
 
 
@@ -142,6 +142,7 @@ def main():
         checkerboard_flags = cv2.CALIB_CB_FAST_CHECK
 
     rospy.init_node('cameracalibrator')
+    print("OpenCVCalibrationNode")
     node = OpenCVCalibrationNode(boards, options.service_check, sync, calib_flags, pattern, options.camera_name,
                                  checkerboard_flags=checkerboard_flags)
     rospy.spin()

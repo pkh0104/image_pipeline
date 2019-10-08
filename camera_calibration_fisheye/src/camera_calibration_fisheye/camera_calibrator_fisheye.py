@@ -41,7 +41,7 @@ import sensor_msgs.msg
 import sensor_msgs.srv
 import threading
 import time
-from camera_calibration.calibrator import MonoCalibrator, StereoCalibrator, ChessboardInfo, Patterns
+from camera_calibration_fisheye.calibrator_fisheye import MonoCalibrator, StereoCalibrator, ChessboardInfo, Patterns
 from collections import deque
 from message_filters import ApproximateTimeSynchronizer
 from std_msgs.msg import String
@@ -219,6 +219,7 @@ class OpenCVCalibrationNode(CalibrationNode):
 
     def __init__(self, *args, **kwargs):
 
+	print("__init__ OpenCVCalibrationNode")
         CalibrationNode.__init__(self, *args, **kwargs)
 
         self.queue_display = deque([], 1)
